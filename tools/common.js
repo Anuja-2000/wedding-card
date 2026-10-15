@@ -3,7 +3,7 @@ import { initializeApp, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 
 // ---- EDIT THESE ----
-export const SITE_URL = "https://binadhieandanuja.com";
+export const SITE_URL = "https://list-app-918a8.web.app";
 export const MESSAGE = (name, link) =>
   `Dear ${name},\n\nWith joy in our hearts, we invite you to celebrate our wedding on Sunday, 17 January 2027 at Avenra Gardens Hotel, Negombo.\n\n` +
   `Please view your invitation and RSVP here:\n${link}\n\nWith love,\nBinadhie & Anuja`;
