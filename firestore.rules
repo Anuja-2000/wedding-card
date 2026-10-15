@@ -1,0 +1,45 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function guestPath(id) {
+      return /databases/$(database)/documents/guests/$(id);
+    }
+
+    function validRsvp(id) {
+      let g = get(guestPath(id)).data;
+      let d = request.resource.data;
+      return d.keys().hasOnly(['name','attending','guests','note','updatedAt'])
+        && d.keys().hasAll(['name','attending','guests','note','updatedAt'])
+        && d.name == g.name
+        && d.attending is bool
+        && d.guests is int
+        && ((d.attending == true && d.guests >= 1 && d.guests <= g.seats)
+            || (d.attending == false && d.guests == 0))
+        && d.note is string && d.note.size() <= 200
+        && d.updatedAt == request.time;
+    }
+
+    // Guest list is written only by tools/sync-guests.js (Admin SDK bypasses these rules).
+    // Anyone with a personal link can read that one guest; the list itself is never readable.
+    match /guests/{id} {
+      allow get: if true;
+      allow list, write: if false;
+    }
+
+    // One RSVP per guest, stored under the guest's id; the guest can update it with their link.
+    match /rsvps/{id} {
+      allow get: if true;
+      allow list, delete: if false;
+      allow create, update: if exists(guestPath(id)) && validRsvp(id);
+    }
+
+    match /wishes/{id} {
+      allow read: if true;
+      allow update, delete: if false;
+      allow create: if request.resource.data.keys().hasOnly(['name','message','createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() <= 60
+        && request.resource.data.message is string && request.resource.data.message.size() <= 300;
+    }
+  }
+}

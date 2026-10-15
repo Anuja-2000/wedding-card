@@ -1,0 +1,14 @@
+{
+  "name": "wedding-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "node sync-guests.js",
+    "preview": "node sync-guests.js --dry",
+    "export": "node export-rsvps.js"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "firebase-admin": "^13.10.0"
+  }
+}

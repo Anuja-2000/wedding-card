@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://firestore.googleapis.com">
+<title>Binadhie & Anuja – Wedding Invitation</title>
+<meta property="og:title" content="You're invited to our wedding">
+<meta property="og:description" content="Join us in celebrating our special day. RSVP inside.">
+<meta property="og:image" content="og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="petals" id="petals" aria-hidden="true"></div>
+<audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+<button class="music-btn" id="musicBtn" type="button" aria-label="Mute music" aria-pressed="false">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="17" cy="16" r="3" /><line class="slash" x1="3" y1="3" x2="21" y2="21" /></svg>
+</button>
+<main class="card">
+
+  <section class="hero">
+    <p class="greeting" id="greeting" hidden>Dear <span id="guestName"></span>,</p>
+    <p class="small">Together with their families</p>
+    <h1 class="script" id="names">Binadhie <span>&amp;</span> Anuja</h1>
+    <p class="small">invite you to celebrate their wedding</p>
+    <p class="seats" id="seats" hidden></p>
+    <a class="scroll-hint" id="scrollHint" href="#date" aria-label="Scroll down to see more">
+      <span class="label">Scroll down</span>
+      <span class="chevrons" aria-hidden="true"><i></i><i></i><i></i></span>
+    </a>
+  </section>
+
+  <section class="reveal" id="date">
+    <h2 class="script">Save the Date</h2>
+    <p class="big" id="dateText">Sunday, 17 January 2027</p>
+    <div class="countdown" id="countdown"></div>
+  </section>
+
+  <section class="reveal">
+    <h2 class="script">The Venue</h2>
+    <p class="big" id="venueName">Avenra Gardens Hotel</p>
+    <p id="venueAddr">Negombo, Sri Lanka</p>
+    <p id="venueTime">Wedding ceremony from 10:00 AM · Lunch to follow</p>
+    <div class="btns">
+      <a class="btn" id="mapBtn" target="_blank" rel="noopener">Open in Maps</a>
+      <a class="btn ghost" id="calBtn" target="_blank" rel="noopener">Add to Calendar</a>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2 class="script">RSVP</h2>
+    <p id="rsvpIntro">Please open the personal invitation link we sent you to RSVP.</p>
+    <form id="rsvpForm" hidden>
+      <p class="as">Responding for <b id="rsvpName"></b></p>
+      <div class="choice" role="radiogroup" aria-label="Will you attend?">
+        <label><input type="radio" name="attending" value="yes" checked><span>♡ Joyfully accepts</span></label>
+        <label><input type="radio" name="attending" value="no"><span>Regretfully declines</span></label>
+      </div>
+      <label class="row" id="guestRow">Number attending
+        <select name="guests" id="guestSelect"></select>
+      </label>
+      <textarea name="note" placeholder="Note (optional)" maxlength="200"></textarea>
+      <input name="website" class="hp" tabindex="-1" autocomplete="off">
+      <button class="btn" type="submit">Send RSVP</button>
+      <p class="status" id="rsvpStatus"></p>
+    </form>
+  </section>
+
+  <section class="reveal">
+    <h2 class="script">Wishes</h2>
+    <form id="wishForm">
+      <input name="name" placeholder="Your name" required maxlength="60">
+      <textarea name="message" placeholder="Write a wish for the couple…" required maxlength="300"></textarea>
+      <input name="website" class="hp" tabindex="-1" autocomplete="off">
+      <button class="btn" type="submit">Send Wish</button>
+      <p class="status" id="wishStatus"></p>
+    </form>
+    <ul class="wishes" id="wishes"></ul>
+  </section>
+
+  <footer class="small">With love ♡
+    <p class="credit">Music: "Gymnopedie No. 1" (Erik Satie), performed by Kevin MacLeod (<a href="https://incompetech.com" target="_blank" rel="noopener">incompetech.com</a>) · Licensed under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a></p>
+  </footer>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
